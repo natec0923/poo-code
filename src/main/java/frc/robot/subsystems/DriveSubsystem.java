@@ -37,11 +37,11 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public static void drive(double throttle, double rotate) {
-    leftFMotor.set(throttle + rotate);
-    rightFMotor.set(throttle - rotate);
+    leftFMotor.set(throttle - rotate);
+    rightFMotor.set(throttle + rotate);
 
-    leftBMotor.set(throttle + rotate);
-    rightBMotor.set(throttle - rotate);
+    leftBMotor.set(throttle - rotate);
+    rightBMotor.set(throttle + rotate);
   }
   
   public void stop() {
@@ -55,10 +55,10 @@ public class DriveSubsystem extends SubsystemBase {
     leftFMotor.setNeutralMode(NeutralMode.Coast);
     rightFMotor.setNeutralMode(NeutralMode.Coast);
 
-    leftBMotor.setInverted (false); 
-    rightBMotor.setInverted (true);
-    leftFMotor.setInverted (false); 
-    rightFMotor.setInverted (true);
+    leftBMotor.setInverted(true); 
+    rightBMotor.setInverted(false);
+    leftFMotor.setInverted(true); 
+    rightFMotor.setInverted(false);
 
    leftBMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 1);
    leftBMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);

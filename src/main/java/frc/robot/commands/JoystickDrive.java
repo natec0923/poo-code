@@ -27,7 +27,6 @@ public class JoystickDrive extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
     driveSubsystem.stop();
   }
 
@@ -35,44 +34,31 @@ public class JoystickDrive extends CommandBase {
   @Override
   public void execute() {
     double throttle = driverController.getY(Hand.kLeft);
-    double rotate = driverController.getY(Hand.kRight);
+    double rotate = driverController.getX(Hand.kRight);
 
-    if((throttle > 0 && throttle < 0.25) || (throttle < 0 && throttle < -0.25)) {
+    if((throttle > 0 && throttle < 0.25) || (throttle < 0 && throttle > -0.25)) {
       throttle = 0;
     }
     else if(throttle > 0.25) {
       throttle = 0.3;
     }
-    else if(throttle > -0.25) {
-      throttle = -0.3 ;
+    else if(throttle < -0.25) {
+      throttle = -0.3;
     }
-    if ((rotate > 0 && rotate < 0.25 ) || (rotate < 0 && rotate < -0.25)) {
+
+    if ((rotate > 0 && rotate < 0.25 ) || (rotate < 0 && rotate > -0.25)) {
       rotate = 0;
     }
     else if(rotate > 0.25) {
       rotate = 0.3;
     }
-    else if(rotate > -0.25) {
+    else if(rotate < -0.25) {
       rotate = -0.3 ;
     }
-    
 
-    //rotation speed scalar
-  
+    //if ()
 
-
-//slow
-    if (driverController.getTriggerAxis(Hand.kRight) > 0.25) {
-      throttle = Math.signum(throttle) * 0.75 ;
-    }
-    else if (driverController.getAButton()) {
-      throttle = (throttle*1.1);
-    }
-    else {
-      throttle = (throttle * 0.0) ;
-  }
-  
-  driveSubsystem.drive(throttle, rotate);
+    driveSubsystem.drive(throttle, rotate);
   }
 
   // Called once the command ends or is interrupted.
