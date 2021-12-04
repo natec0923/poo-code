@@ -26,7 +26,10 @@ public class JoystickDrive extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+
+    driveSubsystem.stop();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -37,15 +40,25 @@ public class JoystickDrive extends CommandBase {
     if((throttle > 0 && throttle < 0.25) || (throttle < 0 && throttle < -0.25)) {
       throttle = 0;
     }
-    else {
-      throttle = throttle;
+    else if(throttle > 0.25) {
+      throttle = 0.3;
     }
-    if ((rotate > 0 && rotate < 0.25 ) || (rotate < 0 && rotate < -0.25)) ; {
+    else if(throttle > -0.25) {
+      throttle = -0.3 ;
+    }
+    if ((rotate > 0 && rotate < 0.25 ) || (rotate < 0 && rotate < -0.25)) {
       rotate = 0;
     }
+    else if(rotate > 0.25) {
+      rotate = 0.3;
+    }
+    else if(rotate > -0.25) {
+      rotate = -0.3 ;
+    }
+    
 
     //rotation speed scalar
-    rotate = 2*rotate ;
+  
 
 
 //slow
